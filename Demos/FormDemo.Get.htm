@@ -1,0 +1,101 @@
+<!--
+
+ This page demos basic Javascript, and URL Parameter theory, and is intended to be linked from...
+
+	FormDemo.htm 		
+
+-->
+
+ 
+<html>
+
+ 
+<head>
+<title>Fun with Forms - Get</title>
+
+<script language="javascript">
+
+function howManyFields( ) {
+// Incoming paramters : 	None.
+// Responsibilities : 		Find how many fields are in the URL parameter list.
+// 							Will always return two the number of "actual" fields because the list will consist of
+//							FieldName = Value for each field.
+// Return Type :			Number of fields in the parameter list.
+
+      searchString = location.search.slice(1);  
+      searchString = unescape(searchString); 
+      formString = searchString.replace(/\+/g, " ");
+      data = formString.split(/[&=]/g); 
+	  // Debug code, activate if you want to "see" what's going on.
+	  // alert("I retrieved : " + data.length);
+      return data.length;
+}
+
+function retrieveData( Which ) { 
+// Incoming paramters : 	An integer denoting which field in the URL parameter list you want returned.
+// Responsibilities : 		Extract a specific field from the URL parameter list.
+//							CAUTION!  Contains no edit checking against "Which", so ensure you pass in a valid number!
+// Return Type :			Requested field from parameter list. 
+
+	  // Debug code, activate if you want to "see" what's going on.
+	  // alert( "location.search.slice(1) : " + location.search.slice(1) );
+      searchString = location.search.slice(1); 
+	
+	  // Debug code, activate if you want to "see" what's going on.
+	  // alert( "unescape(searchString) : " + unescape(searchString) );
+      searchString = unescape(searchString);
+	  
+	  // Debug code, activate if you want to "see" what's going on.
+	  // alert( "searchString.replace(/\+/g, ' ') : " + searchString.replace(/\+/g, " ") );
+	  formString = searchString.replace(/\+/g, " ");
+	  
+	  // Debug code, activate if you want to "see" what's going on.
+	  // alert( "formString.split(/[&=]/g) : " + formString.split(/[&=]/g) );
+      data = formString.split(/[&=]/g); 
+	  
+	  // Debug code, activate if you want to "see" what's going on.
+	  // alert("I'm returning : " + data[Which]);
+      return data[Which];
+} 
+
+</script>
+
+
+</head>
+
+<body>
+
+<p><hr>
+	<font size="2" face="arial"> 
+		  
+		  <b>You received ::</b>
+		  <br /><br />
+		  
+		  <!-- Here's a dump of everything we received.  Not very useful on a production page, 						-->
+		  <!-- but shown here as way of proof of what has been sent / received										-->
+		  
+		  <!-- Note that howManyFields() and retrieveData() are Javascript functions defined above in the <head>	-->
+		  
+		  <script language="javascript"> for (i=0;i<howManyFields();i++) document.write( "("+i+") " + retrieveData(i) + "<br />" ); </script>
+		  <br /><br /><br />
+		  
+		  <!-- Here's how to display a single field if you know its position 						-->
+		  <br /> First Name:  <script language="javascript"> document.write( retrieveData(3) ); </script>
+	
+		  
+		  <!-- ToDo ... can you get the rest of these fields correctly working? 					-->
+		  <br /> Last Name:  
+		  <br /> Language:  
+		  <br /> Favorite Course:  
+		  <br /> Favorite Computer Language(s): 
+		  <br /><br /><br />
+		  
+	</font>
+<hr></p>
+
+
+<a href="formdemo.htm">Back to beginning</a>
+
+</body>
+</html>
+

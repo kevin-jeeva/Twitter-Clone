@@ -1,0 +1,177 @@
+<!--
+
+ This page demos basic Form, Javascript, and Cookie theory, and is intended to be linked from...
+
+	FormDemo.htm 		
+
+-->
+
+<html>
+ 
+<head>
+
+<title>Fun with Forms - Cookies</title>
+
+<script language="javascript">
+
+	
+	function seedFormWithCookieValues ( ) {
+	// Incoming parameters:	None.
+	// Responsibilities:	Intended to be called from <body onload>, this will retrieve cookie values created by FormDemo.htm
+	//						and seed all controls contained in the form MyForm3.
+	// Return type:			None.
+	
+		// Text boxes "firstname", "lastname"
+		document.myForm3.firstname.value =	getCookie("FirstName");	// Name of control (assigned) Name of cookie returns value
+		document.myForm3.lastname.value =	getCookie("LastName");		
+		
+		// Radio group "language"
+		switch ( getCookie("Language") ) {	// Name of cookie returns value , used for case(s)
+				case "English": 		document.myForm3.language[0].checked=true;	break;	// (Case) Value of cookie : Name of control (assigned true)
+				case "Français": 		document.myForm3.language[1].checked=true;	break;
+				case "Español": 		document.myForm3.language[2].checked=true;	break;
+
+		}
+		
+		// Dropdown "course"
+		switch ( getCookie("CourseCode") ) {	// Name of cookie returns value , used for case(s)
+				case "SSWB": 			document.myForm3.course[0].selected=true;	break;		// (Case) Value of cookie : Name of control (assigned true)
+				case "ETHC": 			document.myForm3.course[1].selected=true;	break;
+				case "ISDP": 			document.myForm3.course[2].selected=true;	break;
+				case "TECH": 			document.myForm3.course[3].selected=true;	break;
+				case "UNIX": 			document.myForm3.course[4].selected=true;	break;
+				case "WTVR": 			document.myForm3.course[5].selected=true;	break;
+		}
+		
+		// Check boxes
+		if ( getCookie("CPP") == "yes" 			) 		document.myForm3.cpp.checked=true;		// Name of cookie returns value (if yes) Name of control (assigned true)
+		if ( getCookie("VisualBasic") == "yes" 	) 		document.myForm3.visualbasic.checked=true;
+		if ( getCookie("PHP") == "yes" 			) 		document.myForm3.PHP.checked=true;
+		if ( getCookie("Java") == "yes" 		) 		document.myForm3.java.checked=true;
+		if ( getCookie("Oracle") == "yes" 		) 		document.myForm3.oracle.checked=true;
+		if ( getCookie("Hex") == "yes" 			) 		document.myForm3.hex.checked=true;
+	
+		
+	}
+	
+	function getCookie( cookieName ) { 
+	// Incoming parameters:	Name of desired Cookie.
+	// Responsibilities:	Find desired Cookie.
+	// Return type:			Value of desired Cookie.   Returns a blank if Cookie not found.
+	
+		var i,x,y,FormDemoCookies=document.cookie.split(";");
+		
+		for ( i=0;i<FormDemoCookies.length;i++ ) {
+		
+				x=FormDemoCookies[i].substr(0,FormDemoCookies[i].indexOf("="));
+				y=FormDemoCookies[i].substr(FormDemoCookies[i].indexOf("=")+1);
+				x=x.replace(/^\s+|\s+$/g,"");
+				
+				if ( x == cookieName ) {
+					return unescape(y);
+				}
+		}
+		
+		return " ";
+	}
+	
+</script>
+
+</head>
+
+<body onload="javascript:seedFormWithCookieValues()">
+
+<!-- Description of FORM tag :: -->
+<!-- NAME needs to be unique.  -->
+<!-- ACTION tells form what page it goes to when form is submitted.  -->
+<form name="myForm3" action="formdemo.htm">
+<table border="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="500" bgcolor="#0033cc">
+<tr>
+	<td bgcolor="#666666"> 
+		<table border="1" cellpadding="3" style="border-collapse: collapse" bordercolor="#cccccc" width="500" bgcolor="#ffffff" height="142">
+		   
+		   <tr>
+		   	   <td width="500" height="18" colspan="2"> 
+			   	   <p align="center"><font size="2" face="arial black" color="#666666">Fun with Forms - Controls Seeded From Cookies<br> ( HTML/Javascript Version )</font></p>
+			   </td>
+		   </tr>
+		   
+		   <tr>		   	   
+		   	   <td width="250" height="38">
+			   	   <font size="2" face="arial">First Name<br></font>
+				   <font face="arial">
+				   		<input type="text" name="firstname" size="30" maxlength="20" value="---" >
+				   </font>
+			   </td>
+			   <td width="250" height="38">
+			   	   <font size="2" face="arial">Last Name<br></font>
+				   <font face="arial"> 
+				   		 <input type="text" name="lastname" size="30" maxlength="20" value="---">
+				   </font>
+			   </td>
+		  </tr>
+		  
+		  <tr>
+		  	  <td width="250" height="38">
+			  	  <font size="2" face="arial">Language Preference<br></font>
+				  <font face="arial">
+				  		<input type="radio"  name="language" value="English" >
+				  </font>
+				  <font size="2" face="arial"> English&nbsp; </font>
+				  <font face="arial"> 
+				  		<input type="radio" name="language" value="Français" >
+				  </font>
+				  <font size="2" face="arial"> Français&nbsp; </font>
+				  <font face="arial">
+				  		<input type="radio" name="language" value="Español" >
+				  </font>
+				  <font size="2" face="arial">Español</font>
+			  </td>
+			  <td width="250" height="38">
+			  	  <font size="2" face="arial">Favorite Course<br></font>
+				  <font face="arial"> 
+				  		<select size="1" name="course"> 
+								<option value="SSWB">ServerSide Websites</option>
+								<option value="ETHC">Ethics</option>
+								<option value="ISDP">ISDP</option>
+								<option value="TECH">Technical Writing</option> 
+								<option value="UNIX">Unix</option> 
+								<option value="WTVR">Whatever I'm Passing</option>
+						</select>
+				  </font> 
+			  </td>
+		</tr>
+		
+		<tr>
+			<td width="500" height="36" colspan="2">
+				<font size="2" face="arial">
+				  &nbsp;Preferred Computer Languages ::<br>
+				  <input type="checkbox" name="cpp" value="cpp" > C++&nbsp;
+				  <input type="checkbox" name="visualbasic" value="visualbasic" > Visual Basic&nbsp;
+				  <input type="checkbox" name="PHP" value="php" > PHP&nbsp;
+				  <input type="checkbox" name="java" value="java" > Java&nbsp;
+				  <input type="checkbox" name="oracle" value="oracle" > Oracle&nbsp;
+				  <input type="checkbox" name="hex" value="hex" > Hex! 
+				</font>
+			</td>
+	   </tr>
+	   
+	   <tr>
+	   	   <td width="250" height="19">&nbsp;</td>
+		   <td width="250" height="19">&nbsp;</td>
+	  </tr>
+	  
+	  <tr>
+	  	  <td width="250" height="1"><input type="submit" value="submit" name="button1"><br/><font size="2" face="arial"> ( Back to FormDemo HTML Version ) </font></td>
+		  <td width="250" height="1"><input type="reset" value="reset" name="button2"></td>
+	  </tr>
+	  
+	  </table>
+	  </td>
+</tr>
+</table>
+</form>
+
+</body>
+</html>
+

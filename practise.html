@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<a href="#myModal" class="btn btn-info btn-lg" data-toggle="modal" data-code="code" data-company="company name">
+  <img src="../images/edit.png" style="width:20px;">
+</a>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" id="myModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="mySmallModalLabel">Codes &amp; Company</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="codec" readonly />
+        <input type="text" id="companyc" readonly />
+      </div>
+    </div>
+  </div>
+</div>
+</html>
+    <script>
+   $(document).ready(function () {  
+  $('#myModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var code = button.data('code'); // Extract info from data-* attributes
+    var company = button.data('company'); // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this);
+    modal.find('#code').val(code);
+    modal.find('#company').val(company);
+  });
+ });
+</script>
